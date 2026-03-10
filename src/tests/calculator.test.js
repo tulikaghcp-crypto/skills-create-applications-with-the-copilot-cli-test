@@ -140,7 +140,7 @@ describe('Calculator - Basic Operations', () => {
     });
 
     test('should throw error for unknown operation', () => {
-      expect(() => calculate('sqrt', 9, 2)).toThrow('Unknown operation: sqrt');
+      expect(() => calculate('unknown', 9, 2)).toThrow('Unknown operation: unknown');
     });
 
     test('should handle string numbers correctly: "5" + "3" = 8', () => {
