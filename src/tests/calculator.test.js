@@ -1,0 +1,184 @@
+const { calculate } = require('../calculator-lib');
+
+describe('Calculator - Basic Operations', () => {
+  // Addition tests
+  describe('Addition', () => {
+    test('should add two numbers: 2 + 3 = 5', () => {
+      expect(calculate('add', 2, 3)).toBe(5);
+    });
+
+    test('should add using + operator: 2 + 3 = 5', () => {
+      expect(calculate('+', 2, 3)).toBe(5);
+    });
+
+    test('should add multiple numbers: 2 + 3 + 5 = 10', () => {
+      expect(calculate('add', 2, 3, 5)).toBe(10);
+    });
+
+    test('should add negative numbers: -5 + 10 = 5', () => {
+      expect(calculate('add', -5, 10)).toBe(5);
+    });
+
+    test('should add decimal numbers: 2.5 + 3.5 = 6', () => {
+      expect(calculate('add', 2.5, 3.5)).toBe(6);
+    });
+
+    test('should add zero: 5 + 0 = 5', () => {
+      expect(calculate('add', 5, 0)).toBe(5);
+    });
+  });
+
+  // Subtraction tests
+  describe('Subtraction', () => {
+    test('should subtract two numbers: 10 - 4 = 6', () => {
+      expect(calculate('subtract', 10, 4)).toBe(6);
+    });
+
+    test('should subtract using - operator: 10 - 4 = 6', () => {
+      expect(calculate('-', 10, 4)).toBe(6);
+    });
+
+    test('should subtract multiple numbers: 20 - 5 - 3 = 12', () => {
+      expect(calculate('subtract', 20, 5, 3)).toBe(12);
+    });
+
+    test('should subtract resulting in negative: 5 - 10 = -5', () => {
+      expect(calculate('subtract', 5, 10)).toBe(-5);
+    });
+
+    test('should subtract decimal numbers: 10.5 - 3.5 = 7', () => {
+      expect(calculate('subtract', 10.5, 3.5)).toBe(7);
+    });
+
+    test('should subtract zero: 5 - 0 = 5', () => {
+      expect(calculate('subtract', 5, 0)).toBe(5);
+    });
+  });
+
+  // Multiplication tests
+  describe('Multiplication', () => {
+    test('should multiply two numbers: 45 * 2 = 90', () => {
+      expect(calculate('multiply', 45, 2)).toBe(90);
+    });
+
+    test('should multiply using * operator: 45 * 2 = 90', () => {
+      expect(calculate('*', 45, 2)).toBe(90);
+    });
+
+    test('should multiply multiple numbers: 2 * 3 * 4 = 24', () => {
+      expect(calculate('multiply', 2, 3, 4)).toBe(24);
+    });
+
+    test('should multiply by zero: 5 * 0 = 0', () => {
+      expect(calculate('multiply', 5, 0)).toBe(0);
+    });
+
+    test('should multiply negative numbers: -3 * 4 = -12', () => {
+      expect(calculate('multiply', -3, 4)).toBe(-12);
+    });
+
+    test('should multiply decimal numbers: 2.5 * 4 = 10', () => {
+      expect(calculate('multiply', 2.5, 4)).toBe(10);
+    });
+
+    test('should multiply two negative numbers: -3 * -4 = 12', () => {
+      expect(calculate('multiply', -3, -4)).toBe(12);
+    });
+  });
+
+  // Division tests
+  describe('Division', () => {
+    test('should divide two numbers: 20 / 5 = 4', () => {
+      expect(calculate('divide', 20, 5)).toBe(4);
+    });
+
+    test('should divide using / operator: 20 / 5 = 4', () => {
+      expect(calculate('/', 20, 5)).toBe(4);
+    });
+
+    test('should divide multiple numbers: 100 / 5 / 4 = 5', () => {
+      expect(calculate('divide', 100, 5, 4)).toBe(5);
+    });
+
+    test('should divide resulting in decimal: 10 / 4 = 2.5', () => {
+      expect(calculate('divide', 10, 4)).toBe(2.5);
+    });
+
+    test('should divide zero by number: 0 / 5 = 0', () => {
+      expect(calculate('divide', 0, 5)).toBe(0);
+    });
+
+    test('should divide negative numbers: -20 / 4 = -5', () => {
+      expect(calculate('divide', -20, 4)).toBe(-5);
+    });
+
+    test('should divide decimal numbers: 7.5 / 2.5 = 3', () => {
+      expect(calculate('divide', 7.5, 2.5)).toBe(3);
+    });
+  });
+
+  // Edge cases and error handling
+  describe('Edge Cases and Error Handling', () => {
+    test('should throw error for division by zero', () => {
+      expect(() => calculate('divide', 10, 0)).toThrow('Division by zero is not allowed');
+    });
+
+    test('should throw error for division by zero in chain', () => {
+      expect(() => calculate('divide', 100, 10, 0)).toThrow('Division by zero is not allowed');
+    });
+
+    test('should throw error for insufficient arguments', () => {
+      expect(() => calculate('add', 5)).toThrow('At least two numbers are required for calculation');
+    });
+
+    test('should throw error with no numbers', () => {
+      expect(() => calculate('add')).toThrow('At least two numbers are required for calculation');
+    });
+
+    test('should throw error for non-numeric input', () => {
+      expect(() => calculate('add', 5, 'abc')).toThrow('All arguments must be valid numbers');
+    });
+
+    test('should throw error for unknown operation', () => {
+      expect(() => calculate('sqrt', 9, 2)).toThrow('Unknown operation: sqrt');
+    });
+
+    test('should handle string numbers correctly: "5" + "3" = 8', () => {
+      expect(calculate('add', '5', '3')).toBe(8);
+    });
+
+    test('should be case-insensitive for operation names', () => {
+      expect(calculate('ADD', 2, 3)).toBe(5);
+      expect(calculate('Subtract', 10, 4)).toBe(6);
+      expect(calculate('MULTIPLY', 3, 4)).toBe(12);
+      expect(calculate('DiViDe', 20, 4)).toBe(5);
+    });
+  });
+
+  // Complex scenarios combining operations
+  describe('Complex Scenarios', () => {
+    test('should handle multiple additions: 1 + 2 + 3 + 4 + 5 = 15', () => {
+      expect(calculate('add', 1, 2, 3, 4, 5)).toBe(15);
+    });
+
+    test('should handle multiple subtractions: 100 - 10 - 20 - 5 = 65', () => {
+      expect(calculate('subtract', 100, 10, 20, 5)).toBe(65);
+    });
+
+    test('should handle multiple multiplications: 2 * 3 * 4 * 5 = 120', () => {
+      expect(calculate('multiply', 2, 3, 4, 5)).toBe(120);
+    });
+
+    test('should handle sequential divisions: 1000 / 10 / 5 / 2 = 10', () => {
+      expect(calculate('divide', 1000, 10, 5, 2)).toBe(10);
+    });
+
+    test('should handle large numbers', () => {
+      expect(calculate('multiply', 1000000, 2)).toBe(2000000);
+    });
+
+    test('should handle very small decimal numbers', () => {
+      expect(calculate('add', 0.0001, 0.0002)).toBeCloseTo(0.0003, 5);
+    });
+  });
+});
