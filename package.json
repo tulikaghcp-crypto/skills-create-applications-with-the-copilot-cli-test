@@ -1,0 +1,23 @@
+{
+  "name": "skills-create-applications-with-the-copilot-cli-test",
+  "version": "1.0.0",
+  "description": "<img src=\"https://octodex.github.com/images/Professortocat_v2.png\" align=\"right\" height=\"200px\" />",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tulikaghcp-crypto/skills-create-applications-with-the-copilot-cli-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tulikaghcp-crypto/skills-create-applications-with-the-copilot-cli-test/issues"
+  },
+  "homepage": "https://github.com/tulikaghcp-crypto/skills-create-applications-with-the-copilot-cli-test#readme",
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
+}
