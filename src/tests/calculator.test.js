@@ -292,6 +292,49 @@ describe('Calculator - Basic Operations', () => {
     });
   });
 
+  // Extended Operations - Image Examples
+  describe('Extended Operations Examples', () => {
+    test('should calculate modulo with 5 % 2 = 1', () => {
+      expect(calculate('modulo', 5, 2)).toBe(1);
+    });
+
+    test('should calculate power with 2 ^ 3 = 8', () => {
+      expect(calculate('power', 2, 3)).toBe(8);
+    });
+
+    test('should calculate square root with √16 = 4', () => {
+      expect(calculate('sqrt', 16)).toBe(4);
+    });
+
+    test('should handle modulo with decimal operands: 7.5 % 2 = 1.5', () => {
+      expect(calculate('modulo', 7.5, 2)).toBe(1.5);
+    });
+
+    test('should handle power with decimal base: 1.5 ^ 2 = 2.25', () => {
+      expect(calculate('power', 1.5, 2)).toBe(2.25);
+    });
+
+    test('should handle square root with decimal result: √2 ≈ 1.414', () => {
+      expect(calculate('sqrt', 2)).toBeCloseTo(1.414, 3);
+    });
+
+    test('should handle fractional powers: 4 ^ 0.5 = 2', () => {
+      expect(calculate('power', 4, 0.5)).toBe(2);
+    });
+
+    test('should handle modulo with larger numbers: 23 % 5 = 3', () => {
+      expect(calculate('modulo', 23, 5)).toBe(3);
+    });
+
+    test('should handle power with larger exponents: 3 ^ 4 = 81', () => {
+      expect(calculate('power', 3, 4)).toBe(81);
+    });
+
+    test('should handle square root of perfect squares: √36 = 6', () => {
+      expect(calculate('sqrt', 36)).toBe(6);
+    });
+  });
+
   // Complex scenarios combining operations
   describe('Complex Scenarios', () => {
     test('should handle multiple additions: 1 + 2 + 3 + 4 + 5 = 15', () => {
@@ -324,6 +367,18 @@ describe('Calculator - Basic Operations', () => {
 
     test('should chain power operations: 2 ^ 2 ^ 3 = 64 (left-to-right)', () => {
       expect(calculate('power', 2, 2, 3)).toBe(64);
+    });
+
+    test('should handle power with very large exponents: 10 ^ 5 = 100000', () => {
+      expect(calculate('power', 10, 5)).toBe(100000);
+    });
+
+    test('should handle modulo with zero result: 15 % 5 = 0', () => {
+      expect(calculate('modulo', 15, 5)).toBe(0);
+    });
+
+    test('should handle square root of large numbers: √1000000 = 1000', () => {
+      expect(calculate('sqrt', 1000000)).toBe(1000);
     });
   });
 });
