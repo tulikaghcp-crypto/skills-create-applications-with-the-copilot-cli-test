@@ -155,6 +155,143 @@ describe('Calculator - Basic Operations', () => {
     });
   });
 
+  // Modulo tests
+  describe('Modulo', () => {
+    test('should perform modulo: 5 % 2 = 1', () => {
+      expect(calculate('modulo', 5, 2)).toBe(1);
+    });
+
+    test('should perform modulo using % operator: 5 % 2 = 1', () => {
+      expect(calculate('%', 5, 2)).toBe(1);
+    });
+
+    test('should perform modulo with larger numbers: 17 % 5 = 2', () => {
+      expect(calculate('modulo', 17, 5)).toBe(2);
+    });
+
+    test('should perform modulo with sequential operations: 10 % 3 % 2 = 1', () => {
+      expect(calculate('modulo', 10, 3, 2)).toBe(1);
+    });
+
+    test('should perform modulo with negative numbers: -10 % 3 = -1', () => {
+      expect(calculate('modulo', -10, 3)).toBe(-1);
+    });
+
+    test('should perform modulo when result is zero: 10 % 5 = 0', () => {
+      expect(calculate('modulo', 10, 5)).toBe(0);
+    });
+
+    test('should throw error for modulo by zero', () => {
+      expect(() => calculate('modulo', 10, 0)).toThrow('Modulo by zero is not allowed');
+    });
+
+    test('should be case-insensitive for modulo: MODULO', () => {
+      expect(calculate('MODULO', 10, 3)).toBe(1);
+    });
+  });
+
+  // Power tests
+  describe('Power (Exponentiation)', () => {
+    test('should calculate power: 2 ^ 3 = 8', () => {
+      expect(calculate('power', 2, 3)).toBe(8);
+    });
+
+    test('should calculate power using ^ operator: 2 ^ 3 = 8', () => {
+      expect(calculate('^', 2, 3)).toBe(8);
+    });
+
+    test('should calculate power using ** operator: 2 ** 3 = 8', () => {
+      expect(calculate('**', 2, 3)).toBe(8);
+    });
+
+    test('should calculate power: 5 ^ 2 = 25', () => {
+      expect(calculate('power', 5, 2)).toBe(25);
+    });
+
+    test('should calculate power with large exponent: 2 ^ 8 = 256', () => {
+      expect(calculate('power', 2, 8)).toBe(256);
+    });
+
+    test('should calculate power with zero exponent: 5 ^ 0 = 1', () => {
+      expect(calculate('power', 5, 0)).toBe(1);
+    });
+
+    test('should calculate power with negative exponent: 2 ^ -2 = 0.25', () => {
+      expect(calculate('power', 2, -2)).toBe(0.25);
+    });
+
+    test('should calculate power with decimal base: 2.5 ^ 2 = 6.25', () => {
+      expect(calculate('power', 2.5, 2)).toBe(6.25);
+    });
+
+    test('should calculate power with sequential operations: 2 ^ 3 ^ 2 = 64 (left-to-right)', () => {
+      expect(calculate('power', 2, 3, 2)).toBe(64);
+    });
+
+    test('should be case-insensitive for power: POWER', () => {
+      expect(calculate('POWER', 3, 4)).toBe(81);
+    });
+  });
+
+  // Square Root tests
+  describe('Square Root', () => {
+    test('should calculate square root: √16 = 4', () => {
+      expect(calculate('sqrt', 16)).toBe(4);
+    });
+
+    test('should calculate square root with decimal result: √2 ≈ 1.414', () => {
+      expect(calculate('sqrt', 2)).toBeCloseTo(1.414, 3);
+    });
+
+    test('should calculate square root of perfect square: √25 = 5', () => {
+      expect(calculate('sqrt', 25)).toBe(5);
+    });
+
+    test('should calculate square root of 1: √1 = 1', () => {
+      expect(calculate('sqrt', 1)).toBe(1);
+    });
+
+    test('should calculate square root of zero: √0 = 0', () => {
+      expect(calculate('sqrt', 0)).toBe(0);
+    });
+
+    test('should calculate square root with small decimal: √0.25 = 0.5', () => {
+      expect(calculate('sqrt', 0.25)).toBe(0.5);
+    });
+
+    test('should calculate square root with large number: √10000 = 100', () => {
+      expect(calculate('sqrt', 10000)).toBe(100);
+    });
+
+    test('should throw error for square root of negative number', () => {
+      expect(() => calculate('sqrt', -4)).toThrow('Cannot calculate square root of a negative number');
+    });
+
+    test('should throw error for square root of negative decimal', () => {
+      expect(() => calculate('sqrt', -2.5)).toThrow('Cannot calculate square root of a negative number');
+    });
+
+    test('should throw error for square root with more than one argument', () => {
+      expect(() => calculate('sqrt', 16, 2)).toThrow('Square root operation requires exactly one number');
+    });
+
+    test('should throw error for square root with no arguments', () => {
+      expect(() => calculate('sqrt')).toThrow('Square root operation requires exactly one number');
+    });
+
+    test('should be case-insensitive for sqrt: SQRT', () => {
+      expect(calculate('SQRT', 9)).toBe(3);
+    });
+
+    test('should accept alternative sqrt naming: square-root', () => {
+      expect(calculate('square-root', 16)).toBe(4);
+    });
+
+    test('should accept alternative sqrt naming: squareroot', () => {
+      expect(calculate('squareroot', 36)).toBe(6);
+    });
+  });
+
   // Complex scenarios combining operations
   describe('Complex Scenarios', () => {
     test('should handle multiple additions: 1 + 2 + 3 + 4 + 5 = 15', () => {
@@ -179,6 +316,14 @@ describe('Calculator - Basic Operations', () => {
 
     test('should handle very small decimal numbers', () => {
       expect(calculate('add', 0.0001, 0.0002)).toBeCloseTo(0.0003, 5);
+    });
+
+    test('should chain modulo operations: 100 % 7 % 3 = 2', () => {
+      expect(calculate('modulo', 100, 7, 3)).toBe(2);
+    });
+
+    test('should chain power operations: 2 ^ 2 ^ 3 = 64 (left-to-right)', () => {
+      expect(calculate('power', 2, 2, 3)).toBe(64);
     });
   });
 });
